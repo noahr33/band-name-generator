@@ -1,7 +1,25 @@
 import { generateSlug } from 'random-word-slugs'
 import chalkAnimation from 'chalk-animation'
+import inquirer from 'inquirer'
 
-const numWords = parseInt(process.argv[2])
-
-const slug = generateSlug(numWords, {format: "title"})
-chalkAnimation.neon(slug)
+inquirer
+    .prompt([
+        {
+            type: 'number',
+            name: 'numWords',
+            message: "How many words do you want in your band name?"
+        },
+        {
+            type: 'list',
+            name: 'animationName',
+            message: 'Which animation would you like to use?',
+            choices:  ['rainbow', 'pulse', 'glitch', 'radar', 'neon', 'karaoke']
+        }
+    ])
+    .then ((answers) => {
+        const slug = generateSlug(answers.numWords, {format: "title"})
+        chalkAnimation[answers.animationName](slug)
+    })
+    .catch ((err) => {
+        console.log(err);
+    })
