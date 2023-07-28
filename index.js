@@ -7,7 +7,8 @@ inquirer
         {
             type: 'number',
             name: 'numWords',
-            message: "How many words do you want in your band name?"
+            message: "How many words do you want in your band name?",
+            default: 3
         },
         {
             type: 'list',
